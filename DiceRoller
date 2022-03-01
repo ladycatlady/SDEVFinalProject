@@ -1,0 +1,21 @@
+import tkinter as tk
+from PIL import Image, ImageTk 
+import random
+
+root = tk.Tk ()
+root.title("Cassie Brindley's Dice Roller")
+root.geometry("500x500")
+
+def six_roll():
+    six_dice = ['one.png' , 'two.png' , 'three.png' , 'four.png' , 'five.png' , 'six.png']
+    roll_one = ImageTk.PhotoImage(open(random.choice(six_dice)))
+
+label = tk.Label(root, image=roll_one)
+
+label.pack(side=tk.CENTER)
+
+Button = tk.Button(root, text='Roll', foreground='blue', command='six_roll')
+
+Button.pack()
+
+root.mainloop()
