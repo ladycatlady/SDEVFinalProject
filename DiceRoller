@@ -1,21 +1,48 @@
 import tkinter as tk
+from tkinter import messagebox
+from turtle import bgcolor
 from PIL import Image, ImageTk 
-import random
+import random , os
 
 root = tk.Tk ()
 root.title("Cassie Brindley's Dice Roller")
-root.geometry("500x500")
+root.geometry("300x150")
+root.configure(bg='white')
+
+six_dice= ["1.png" , "2.png" , "3.png" , "4.png" , "5.png" , "6.png"]
+
+roll_one = ImageTk.PhotoImage(Image.open(random.choice(six_dice)))
+roll_two_one = ImageTk.PhotoImage(Image.open(random.choice(six_dice)))
+roll_two_two = ImageTk.PhotoImage(Image.open(random.choice(six_dice)))
+
+label1 = tk.Label(root, image=roll_one)
+label2 = tk.Label(root, image=roll_two_one)
 
 def six_roll():
-    six_dice = ['one.png' , 'two.png' , 'three.png' , 'four.png' , 'five.png' , 'six.png']
-    roll_one = ImageTk.PhotoImage(open(random.choice(six_dice)))
+    roll_one = ImageTk.PhotoImage(Image.open(random.choice(six_dice)))
+    label1.configure(image=roll_one)
+    label1.image=roll_one
+    label1.grid(row = 1, column= 1)
 
-label = tk.Label(root, image=roll_one)
+def six_roll_two():
+    roll_two_two = ImageTk.PhotoImage(Image.open(random.choice(six_dice)))
+    label2.configure(image=roll_two_two)
+    label2.image=roll_two_two
+    label2.grid(row = 1, column = 2)
 
-label.pack(side=tk.CENTER)
+def instructions():
+    messagebox.showinfo('Instructions', 'Hi there! The dice roller is easy! Click "Roll Die One" to display your first die and click "Roll Die Two" to display your second die. Click "Exit" when you are finished. Good luck!')
 
-Button = tk.Button(root, text='Roll', foreground='blue', command='six_roll')
+Button1 = tk.Button(root, text='Roll Die One', foreground='black', command=six_roll)
+Button1.grid(row = 2, column = 1)
 
-Button.pack()
+Button2 = tk.Button(root, text='Roll Die Two', foreground='black', command=six_roll_two)
+Button2.grid(row = 2, column = 2)
+
+Button3 = tk.Button(root, text='Exit', foreground='black', command=root.destroy)
+Button3.grid(row = 3, column = 1)
+
+Button4 = tk.Button(root, text='Instructions', foreground='black', command=instructions)
+Button4.grid(row = 3, column = 2)
 
 root.mainloop()
